@@ -1,5 +1,7 @@
 ﻿def debug(message)
-    cmd :debug, message:
+    cmd :debug, messge:
 end
 
-debug("hello, world in ruby")
+
+debug("Hello, World!")
+
