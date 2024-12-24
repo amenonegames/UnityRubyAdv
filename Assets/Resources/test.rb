@@ -1,8 +1,5 @@
-﻿# def debug(message)
-#     cmd :debug, message: "Helllo, world!"
-# end
+﻿def debug(message)
+    cmd :debug, message:
+end
 
-# log "Log to Unity !"
-# cmd :debug, message: "Hello, world!"
-
-cmd :debug, message: "Hello, world!"
+debug("hello, world in ruby")
