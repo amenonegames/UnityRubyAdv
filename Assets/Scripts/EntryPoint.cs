@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DefaultNamespace.Logic;
+using UnityEngine;
 using VContainer.Unity;
 using VitalRouter;
 using VitalRouter.MRuby;
@@ -7,24 +8,16 @@ namespace DefaultNamespace
 {
     public class EntryPoint : IStartable
     {
-        private readonly Router _router;
+        private readonly RubyRunner _runner;
 
-        public EntryPoint(Router router)
+        public EntryPoint(RubyRunner runner)
         {
-            _router = router;
+            _runner = runner;
         }
 
         public async void Start()
         {
-            var context = MRubyContext.Create();
-            context.Router = _router;                // ... 1
-            context.CommandPreset = new MyCommandPreset(); // ... 2
-            
-            var rubySource = Resources.Load<TextAsset>("test");
-
-            using MRubyScript script = context.CompileScript(rubySource.bytes);    
-            await script.RunAsync();
-            
+            await _runner.RunAsync();
         }
     }
 }

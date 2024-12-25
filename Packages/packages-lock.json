@@ -1,5 +1,14 @@
 {
   "dependencies": {
+    "com.amenone.vcontainerextensions": {
+      "version": "https://github.com/amenonegames/VContainerExtensions.git?path=/Packages/com.amenone.vcontainerextensions",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "jp.hadashikick.vcontainer": "1.13.2"
+      },
+      "hash": "1a4b53f68eeec8a5020acd4b78826f67f8669f0b"
+    },
     "com.cysharp.unitask": {
       "version": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
       "depth": 0,
