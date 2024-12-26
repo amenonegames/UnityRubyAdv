@@ -1,8 +1,10 @@
-﻿using DefaultNamespace;
+﻿using Cysharp.Threading.Tasks;
+using DefaultNamespace;
 using DefaultNamespace.Data;
 using DefaultNamespace.Factory;
 using DefaultNamespace.Logic;
 using DefaultNamespace.View;
+using UnityEngine.UI;
 using VitalRouter;
 
 namespace Presenter
@@ -12,6 +14,7 @@ namespace Presenter
     {
         private readonly SharedStateHandler _sharedStateHandler;
         private readonly OptionController _optionController;
+        private bool _waitOptionSelected;
 
         public OptionPresenter(SharedStateHandler sharedStateHandler, OptionController optionController)
         {
@@ -24,12 +27,15 @@ namespace Presenter
         {
             _sharedStateHandler.Set("result" , command.OptionMessage);
             _optionController.ClearOptions();
+            _waitOptionSelected = false;
         }
 
         [Route] 
-        void ShowOption(ShowOptionCommand command)
+        async UniTask ShowOption(ShowOptionCommand command)
         {
+            _waitOptionSelected = true;
             _optionController.CreateOptions(command.Options);
+            await UniTask.WaitWhile(()=>_waitOptionSelected);
         }
         
     }
