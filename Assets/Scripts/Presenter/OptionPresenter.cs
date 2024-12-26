@@ -2,6 +2,7 @@
 using DefaultNamespace.Data;
 using DefaultNamespace.Factory;
 using DefaultNamespace.Logic;
+using DefaultNamespace.View;
 using VitalRouter;
 
 namespace Presenter
@@ -10,24 +11,25 @@ namespace Presenter
     public partial class OptionPresenter
     {
         private readonly SharedStateHandler _sharedStateHandler;
-        private readonly OptionFactory _optionFactory;
+        private readonly OptionController _optionController;
 
-        public OptionPresenter(SharedStateHandler sharedStateHandler, OptionFactory optionFactory)
+        public OptionPresenter(SharedStateHandler sharedStateHandler, OptionController optionController)
         {
             _sharedStateHandler = sharedStateHandler;
-            _optionFactory = optionFactory;
+            _optionController = optionController;
         }
 
         [Route]
-        private void OnOptionSelected( SelectOptionCommand command)
+        void OnOptionSelected( SelectOptionCommand command)
         {
             _sharedStateHandler.Set("result" , command.OptionMessage);
+            _optionController.ClearOptions();
         }
 
         [Route] 
-        private void ShowOption(ShowOptionCommand command)
+        void ShowOption(ShowOptionCommand command)
         {
-            _optionFactory.Create(command.Options);
+            _optionController.CreateOptions(command.Options);
         }
         
     }

@@ -17,7 +17,7 @@ namespace DefaultNamespace
     public class SampleContainerBuilder : LifetimeScope
     {
 		[SerializeField] private Transform _parent;
-        [SerializeField] private OptionView _optionView;
+        [SerializeField] private OptionViewBase _optionView;
         
         protected override void Configure(IContainerBuilder builder)
         {
@@ -52,6 +52,12 @@ namespace DefaultNamespace
                 .AsSelf();
 
             builder.Register<OptionFactory>(Lifetime.Singleton)
+                .AsSelf();
+            
+            builder.Register<OptionReferenceHolder>(Lifetime.Singleton)
+                .AsSelf();
+            
+            builder.Register<OptionController>(Lifetime.Singleton)
                 .AsSelf();
         }
     }
