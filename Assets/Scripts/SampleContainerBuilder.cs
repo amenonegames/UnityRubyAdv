@@ -1,6 +1,4 @@
-﻿using amenone.VcontainerExtensions.Identifier;
-using amenone.VcontainerExtensions.Utils;
-using DefaultNamespace.Data;
+﻿using DefaultNamespace.Data;
 using DefaultNamespace.Factory;
 using DefaultNamespace.Logic;
 using DefaultNamespace.Presenter;
@@ -18,6 +16,8 @@ namespace DefaultNamespace
     {
 		[SerializeField] private Transform _parent;
         [SerializeField] private OptionViewBase _optionView;
+        [SerializeField] private MessageVisualizer _messageVisualizer;
+        [SerializeField] private VerticalPlaceOptionRoot _verticalPlaceOptionRoot;
         
         protected override void Configure(IContainerBuilder builder)
         {
@@ -30,11 +30,12 @@ namespace DefaultNamespace
 
             builder.RegisterEntryPoint<EntryPoint>(Lifetime.Singleton);
             builder.RegisterComponent(_optionView);
-
-            var registerables =_parent.GetComponentsInChildren<IRegisterMarker>(true);
-
-            builder.RegisterComponentOrNullObFromArray<IMessageVisualizable, IMessageVisualizableAsNullObj>(registerables,true,true);
-            builder.RegisterComponentOrNullObFromArray<IOptionRoot, IOptionRootAsNullObj>(registerables,true,true);
+            
+            builder.RegisterComponent(_messageVisualizer)
+                .AsImplementedInterfaces();
+            
+            builder.RegisterComponent(_verticalPlaceOptionRoot)
+                .AsImplementedInterfaces();
             
             var context = MRubyContext.Create();
             builder.RegisterInstance(context);

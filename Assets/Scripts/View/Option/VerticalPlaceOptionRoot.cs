@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using amenone.VcontainerExtensions.Identifier;
 using UnityEngine;
 
 namespace DefaultNamespace.View
 {
-    public class VerticalPlaceOptionRoot : MonoBehaviour ,  IRegisterMarker , IOptionRoot
+    public class VerticalPlaceOptionRoot : MonoBehaviour , IOptionRoot
     {
         public Transform Transform => transform;
     public void SetParent(IEnumerable<OptionViewBase> children)
