@@ -1,11 +1,12 @@
 ﻿using Cysharp.Threading.Tasks;
 using DefaultNamespace.Data;
+using DefaultNamespace.Logic.Interface;
 using UnityEngine;
 using VitalRouter.MRuby;
 
 namespace DefaultNamespace.Logic
 {
-    public class RubyRunner
+    public class RubyRunner : IScriptRunner
     {
         private readonly RubyContextHolder _contextHolder;
         public RubyRunner(RubyContextHolder contextHolder)

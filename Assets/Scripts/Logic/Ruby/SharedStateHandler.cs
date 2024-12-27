@@ -1,8 +1,9 @@
 ﻿using DefaultNamespace.Data;
+using DefaultNamespace.Logic.Interface;
 
 namespace DefaultNamespace.Logic
 {
-    public class SharedStateHandler
+    public class SharedStateHandler : ISharedVariableHandleable
     {
         private readonly RubyContextHolder _contextHolder;
 

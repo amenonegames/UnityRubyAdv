@@ -1,4 +1,5 @@
 ﻿using DefaultNamespace.Logic;
+using DefaultNamespace.Logic.Interface;
 using UnityEngine;
 using VContainer.Unity;
 using VitalRouter;
@@ -8,9 +9,9 @@ namespace DefaultNamespace
 {
     public class EntryPoint : IStartable
     {
-        private readonly RubyRunner _runner;
+        private readonly IScriptRunner _runner;
 
-        public EntryPoint(RubyRunner runner)
+        public EntryPoint(IScriptRunner runner)
         {
             _runner = runner;
         }

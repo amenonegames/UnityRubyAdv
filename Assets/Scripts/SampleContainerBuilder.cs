@@ -1,6 +1,7 @@
 ﻿using DefaultNamespace.Data;
 using DefaultNamespace.Factory;
 using DefaultNamespace.Logic;
+using DefaultNamespace.Logic.Lua;
 using DefaultNamespace.Presenter;
 using DefaultNamespace.View;
 using Presenter;
@@ -9,6 +10,7 @@ using VContainer;
 using VContainer.Unity;
 using VitalRouter.MRuby;
 using VitalRouter.VContainer;
+using XLua;
 
 namespace DefaultNamespace
 {
@@ -37,9 +39,10 @@ namespace DefaultNamespace
             builder.RegisterComponent(_verticalPlaceOptionRoot)
                 .AsImplementedInterfaces();
             
+            // Ruby
             var context = MRubyContext.Create();
             builder.RegisterInstance(context);
-
+            
             builder.Register<MyCommandPreset>(Lifetime.Singleton)
                 .As<MRubyCommandPreset>();
 
@@ -47,10 +50,21 @@ namespace DefaultNamespace
                 .AsSelf();
 
             builder.Register<RubyRunner>(Lifetime.Singleton)
-                .AsSelf();
+                .AsImplementedInterfaces();
+            
+            // Lua
+            // var env = new LuaEnv();
+            // builder.RegisterInstance(env);
+            //
+            // builder.Register<LuaEnvHolder>(Lifetime.Singleton)
+            //     .AsSelf();
+            //
+
+
+
 
             builder.Register<SharedStateHandler>(Lifetime.Singleton)
-                .AsSelf();
+                .AsImplementedInterfaces();
 
             builder.Register<OptionFactory>(Lifetime.Singleton)
                 .AsSelf();

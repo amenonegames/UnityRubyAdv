@@ -3,6 +3,7 @@ using DefaultNamespace;
 using DefaultNamespace.Data;
 using DefaultNamespace.Factory;
 using DefaultNamespace.Logic;
+using DefaultNamespace.Logic.Interface;
 using DefaultNamespace.View;
 using UnityEngine.UI;
 using VitalRouter;
@@ -12,11 +13,11 @@ namespace Presenter
     [Routes]
     public partial class OptionPresenter
     {
-        private readonly SharedStateHandler _sharedStateHandler;
+        private readonly ISharedVariableHandleable _sharedStateHandler;
         private readonly OptionController _optionController;
         private bool _waitOptionSelected;
 
-        public OptionPresenter(SharedStateHandler sharedStateHandler, OptionController optionController)
+        public OptionPresenter(ISharedVariableHandleable sharedStateHandler, OptionController optionController)
         {
             _sharedStateHandler = sharedStateHandler;
             _optionController = optionController;
