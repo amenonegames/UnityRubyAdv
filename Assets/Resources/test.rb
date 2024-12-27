@@ -10,15 +10,20 @@ def o(opMessage)
     cmd :option, options: opMessage
 end
 
+def yesResponce()
+    t("Yes? Really?")
+end
+
 debug("start")
 t("please press continue button")
 
 o(["Yes", "No"])
 
 if state[:result].is?("Yes") #=> true
-    t("Yes? Really?")
+    yesResponce()
 else 
     t("No? Really?")
 end
 
 t("end")
+
