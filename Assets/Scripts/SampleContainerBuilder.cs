@@ -10,7 +10,6 @@ using VContainer;
 using VContainer.Unity;
 using VitalRouter.MRuby;
 using VitalRouter.VContainer;
-using XLua;
 
 namespace DefaultNamespace
 {
@@ -39,32 +38,30 @@ namespace DefaultNamespace
             builder.RegisterComponent(_verticalPlaceOptionRoot)
                 .AsImplementedInterfaces();
             
-            // Ruby
-            var context = MRubyContext.Create();
-            builder.RegisterInstance(context);
-            
-            builder.Register<MyCommandPreset>(Lifetime.Singleton)
-                .As<MRubyCommandPreset>();
-
-            builder.Register<RubyContextHolder>(Lifetime.Singleton)
-                .AsSelf();
-
-            builder.Register<RubyRunner>(Lifetime.Singleton)
-                .AsImplementedInterfaces();
-            
-            // Lua
-            // var env = new LuaEnv();
-            // builder.RegisterInstance(env);
+            // // Ruby
+            // var context = MRubyContext.Create();
+            // builder.RegisterInstance(context);
             //
-            // builder.Register<LuaEnvHolder>(Lifetime.Singleton)
+            // builder.Register<MyCommandPreset>(Lifetime.Singleton)
+            //     .As<MRubyCommandPreset>();
+            //
+            // builder.Register<RubyContextHolder>(Lifetime.Singleton)
             //     .AsSelf();
             //
+            // builder.Register<RubyRunner>(Lifetime.Singleton)
+            //     .AsImplementedInterfaces();
+            //
+            // builder.Register<SharedStateHandler>(Lifetime.Singleton)
+            //     .AsImplementedInterfaces();
+            
+            // Lua
 
-
-
-
-            builder.Register<SharedStateHandler>(Lifetime.Singleton)
-                .AsImplementedInterfaces();
+            
+            builder.Register<LuaEnvHolder>(Lifetime.Singleton)
+                .AsSelf();
+            
+            
+            
 
             builder.Register<OptionFactory>(Lifetime.Singleton)
                 .AsSelf();
