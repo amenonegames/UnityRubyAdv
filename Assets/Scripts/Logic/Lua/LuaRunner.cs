@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using DefaultNamespace.Logic.Interface;
 using Lua;
+using Lua.Standard;
 using Lua.Unity;
 using UnityEngine;
 
@@ -25,13 +26,16 @@ namespace DefaultNamespace.Logic.Lua
             CancellationTokenSource cts = new CancellationTokenSource();
             CancellationToken token = cts.Token;
             
-            var script = Resources.Load<LuaAsset>("testLua");
+            var script = Resources.Load<LuaAsset>("Assets/Resources/testLua");
             
             _luaFunctionAdder.AddFunctions();
             
+            // Add standard libraries
+            _luaStateHolder.LuaState.OpenModuleLibrary();
+            
             try
             {
-                await _luaStateHolder.LuaState.DoStringAsync(script.Text, cancellationToken:token);
+                await _luaStateHolder.LuaState.DoFileAsync("Assets/Resources/testLua.lua", cancellationToken:token);
             }
             catch (LuaParseException)
             {

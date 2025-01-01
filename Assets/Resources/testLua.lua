@@ -1,21 +1,19 @@
-local t = function( message )
-    talk( message )
-end
 
-local o = function( options )
-    return option( options )
-end
+local helpers = require ("Assets/Resources/commands.lua")
+--require "dialogueMachine"
 
-print "Hello Lua" 
+local t = helpers.t
+local o = helpers.o
 
 t "Please Press Continue" 
 
 local result = o { "Yes", "No" }
 
 if result == "Yes" then
-    t "You Pressed Yes" 
+    helpers.yesResponse()
 else
-    t "You Pressed No" 
+    helpers.noResponse()
 end
 
-t "end" 
+t "end"
+
