@@ -30,23 +30,11 @@ namespace DefaultNamespace.Logic.Lua
             
             _luaFunctionAdder.AddFunctions();
             
-            // Add standard libraries
+            // Add handle require libraries
             _luaStateHolder.LuaState.OpenModuleLibrary();
             
-            try
-            {
-                await _luaStateHolder.LuaState.DoFileAsync("Assets/Resources/testLua.lua", cancellationToken:token);
-            }
-            catch (LuaParseException)
-            {
-                // 構文にエラーがあった際の処理
-                throw;
-            }
-            catch (LuaRuntimeException)
-            {
-                // 実行時例外が発生した際の処理
-                throw;
-            }
+            await _luaStateHolder.LuaState.DoFileAsync("Assets/Resources/testLua.lua", cancellationToken:token);
+
         }
     }
 }

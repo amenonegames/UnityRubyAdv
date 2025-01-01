@@ -11,13 +11,5 @@ helpers.o = function(options)
     return option(options)
 end
 
-helpers.yesResponse = function()
-    helpers.t "You Pressed Yes"
-end
-
-helpers.noResponse = function()
-    helpers.t "You Pressed No"
-end
-
 -- モジュールを返す
 return helpers

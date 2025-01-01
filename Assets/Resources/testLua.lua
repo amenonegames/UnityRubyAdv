@@ -1,19 +1,40 @@
 
 local helpers = require ("Assets/Resources/commands.lua")
---require "dialogueMachine"
+local dm = require ("Assets/Resources/DialogueManager.lua")
 
 local t = helpers.t
 local o = helpers.o
 
-t "Please Press Continue" 
+local addNode = function(...) dm:addNode(...) end
+local jump = function(...) dm:jump(...) end
 
-local result = o { "Yes", "No" }
+addNode ("start", function()
+    t "Hello, World!"
+    t "This is a test."
+    t "Please Press Continue"
+    jump ("continue")
+end)
 
-if result == "Yes" then
-    helpers.yesResponse()
-else
-    helpers.noResponse()
-end
+addNode ("continue", function()
+    t "Do you want to continue?"
+    local result = o { "Yes", "No" }
+    if result == "Yes" then
+        jump ("yesResponse")
+    else
+        jump ("noResponse")
+    end
+end)
 
-t "end"
+addNode ("yesResponse", function()
+    t "You chose Yes!"
+    t "Goodbye!"
+    t "end"
+end)
 
+addNode ("noResponse", function()
+    t "You chose No!"
+    t "Goodbye!"
+    t "end"
+end)
+
+dm:start()
