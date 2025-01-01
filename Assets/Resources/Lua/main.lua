@@ -1,6 +1,6 @@
 
-local helpers = require ("Assets/Resources/commands.lua")
-local dm = require ("Assets/Resources/DialogueManager.lua")
+local helpers = require ("Assets/Resources/Lua/commands.lua")
+local dm = require ("Assets/Resources/Lua/DialogueManager.lua")
 
 local t = helpers.t
 local o = helpers.o

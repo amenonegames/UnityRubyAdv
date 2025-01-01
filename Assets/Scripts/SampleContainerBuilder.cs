@@ -22,6 +22,8 @@ namespace DefaultNamespace
         [SerializeField] private MessageVisualizer _messageVisualizer;
         [SerializeField] private VerticalPlaceOptionRoot _verticalPlaceOptionRoot;
         
+        [SerializeField] private bool _useRuby;
+        
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterVitalRouter( routing =>
@@ -39,38 +41,44 @@ namespace DefaultNamespace
             
             builder.RegisterComponent(_verticalPlaceOptionRoot)
                 .AsImplementedInterfaces();
+
+            if (_useRuby)
+            {
+                // Ruby
+                var context = MRubyContext.Create();
+                builder.RegisterInstance(context);
+                
+                builder.Register<MyCommandPreset>(Lifetime.Singleton)
+                    .As<MRubyCommandPreset>();
+                
+                builder.Register<RubyContextHolder>(Lifetime.Singleton)
+                    .AsSelf();
+                
+                builder.Register<RubyRunner>(Lifetime.Singleton)
+                    .AsImplementedInterfaces();
+                
+                builder.Register<RubySharedStateHandler>(Lifetime.Singleton)
+                    .AsImplementedInterfaces();
+            }
+            else
+            {
+                // Lua
+                var state = LuaState.Create();
+                builder.RegisterInstance(state);
+                
+                builder.Register<LuaStateHolder>(Lifetime.Singleton)
+                    .AsSelf();
+                
+                builder.Register<LuaRunner>(Lifetime.Singleton)
+                    .AsImplementedInterfaces();
+                
+                builder.Register<LuaSharedStateHandler>(Lifetime.Singleton)
+                    .AsImplementedInterfaces();
+                
+                builder.Register<LuaFunctionAdder>(Lifetime.Singleton)
+                    .AsSelf();
+            }
             
-            // // Ruby
-            // var context = MRubyContext.Create();
-            // builder.RegisterInstance(context);
-            //
-            // builder.Register<MyCommandPreset>(Lifetime.Singleton)
-            //     .As<MRubyCommandPreset>();
-            //
-            // builder.Register<RubyContextHolder>(Lifetime.Singleton)
-            //     .AsSelf();
-            //
-            // builder.Register<RubyRunner>(Lifetime.Singleton)
-            //     .AsImplementedInterfaces();
-            //
-            // builder.Register<RubySharedStateHandler>(Lifetime.Singleton)
-            //     .AsImplementedInterfaces();
-            
-            // Lua
-            var state = LuaState.Create();
-            builder.RegisterInstance(state);
-            
-            builder.Register<LuaStateHolder>(Lifetime.Singleton)
-                .AsSelf();
-            
-            builder.Register<LuaRunner>(Lifetime.Singleton)
-                .AsImplementedInterfaces();
-            
-            builder.Register<LuaSharedStateHandler>(Lifetime.Singleton)
-                .AsImplementedInterfaces();
-            
-            builder.Register<LuaFunctionAdder>(Lifetime.Singleton)
-                .AsSelf();
             
 
             builder.Register<OptionFactory>(Lifetime.Singleton)

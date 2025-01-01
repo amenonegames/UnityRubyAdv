@@ -26,14 +26,12 @@ namespace DefaultNamespace.Logic.Lua
             CancellationTokenSource cts = new CancellationTokenSource();
             CancellationToken token = cts.Token;
             
-            var script = Resources.Load<LuaAsset>("Assets/Resources/testLua");
-            
             _luaFunctionAdder.AddFunctions();
             
             // Add handle require libraries
             _luaStateHolder.LuaState.OpenModuleLibrary();
             
-            await _luaStateHolder.LuaState.DoFileAsync("Assets/Resources/testLua.lua", cancellationToken:token);
+            await _luaStateHolder.LuaState.DoFileAsync("Assets/Resources/Lua/main.lua", cancellationToken:token);
 
         }
     }
