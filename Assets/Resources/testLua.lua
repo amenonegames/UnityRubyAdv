@@ -8,14 +8,16 @@ local o = helpers.o
 local addNode = function(...) dm:addNode(...) end
 local jump = function(...) dm:jump(...) end
 
-addNode ("start", function()
+addNode 
+("start", function()
     t "Hello, World!"
     t "This is a test."
     t "Please Press Continue"
     jump ("continue")
 end)
 
-addNode ("continue", function()
+addNode 
+("continue", function()
     t "Do you want to continue?"
     local result = o { "Yes", "No" }
     if result == "Yes" then
@@ -25,13 +27,15 @@ addNode ("continue", function()
     end
 end)
 
-addNode ("yesResponse", function()
+addNode 
+("yesResponse", function()
     t "You chose Yes!"
     t "Goodbye!"
     t "end"
 end)
 
-addNode ("noResponse", function()
+addNode 
+("noResponse", function()
     t "You chose No!"
     t "Goodbye!"
     t "end"
