@@ -3,11 +3,11 @@ using DefaultNamespace.Logic.Interface;
 
 namespace DefaultNamespace.Logic
 {
-    public class SharedStateHandler : ISharedVariableHandleable
+    public class RubySharedStateHandler : ISharedVariableHandleable
     {
         private readonly RubyContextHolder _contextHolder;
 
-        public SharedStateHandler(RubyContextHolder contextHolder)
+        public RubySharedStateHandler(RubyContextHolder contextHolder)
         {
             _contextHolder = contextHolder;
         }

@@ -1,9 +1,11 @@
-﻿using DefaultNamespace.Data;
+﻿using System;
+using DefaultNamespace.Data;
 using DefaultNamespace.Factory;
 using DefaultNamespace.Logic;
 using DefaultNamespace.Logic.Lua;
 using DefaultNamespace.Presenter;
 using DefaultNamespace.View;
+using Lua;
 using Presenter;
 using UnityEngine;
 using VContainer;
@@ -51,16 +53,24 @@ namespace DefaultNamespace
             // builder.Register<RubyRunner>(Lifetime.Singleton)
             //     .AsImplementedInterfaces();
             //
-            // builder.Register<SharedStateHandler>(Lifetime.Singleton)
+            // builder.Register<RubySharedStateHandler>(Lifetime.Singleton)
             //     .AsImplementedInterfaces();
             
             // Lua
-
+            var state = LuaState.Create();
+            builder.RegisterInstance(state);
             
-            builder.Register<LuaEnvHolder>(Lifetime.Singleton)
+            builder.Register<LuaStateHolder>(Lifetime.Singleton)
                 .AsSelf();
             
+            builder.Register<LuaRunner>(Lifetime.Singleton)
+                .AsImplementedInterfaces();
             
+            builder.Register<LuaSharedStateHandler>(Lifetime.Singleton)
+                .AsImplementedInterfaces();
+            
+            builder.Register<LuaFunctionAdder>(Lifetime.Singleton)
+                .AsSelf();
             
 
             builder.Register<OptionFactory>(Lifetime.Singleton)
