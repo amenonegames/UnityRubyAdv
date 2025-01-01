@@ -2,6 +2,7 @@
 using DefaultNamespace;
 using DefaultNamespace.Data;
 using DefaultNamespace.Factory;
+using DefaultNamespace.Identfier;
 using DefaultNamespace.Logic;
 using DefaultNamespace.Logic.Interface;
 using DefaultNamespace.View;
@@ -26,7 +27,7 @@ namespace Presenter
         [Route]
         void OnOptionSelected( SelectOptionCommand command)
         {
-            _sharedStateHandler.Set("result" , command.OptionMessage);
+            _sharedStateHandler.Set(Identifier.OptionResult , command.OptionMessage);
             _optionController.ClearOptions();
             _waitOptionSelected = false;
         }

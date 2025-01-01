@@ -31,7 +31,8 @@ namespace DefaultNamespace.Logic.Lua
             _luaStateHolder.LuaState.Environment["print"]=(new LuaFunction((context , buffer, token) =>
             {
                 var args = context.GetArgument<string>(0);
-                Debug.Log(args);
+                
+                _commandPublisher.PublishAsync(new DebugCommand() {Message = args});
                 return new ValueTask<int>(0);
             }));
 
@@ -52,7 +53,10 @@ namespace DefaultNamespace.Logic.Lua
                 await _commandPublisher.PublishAsync(new ShowOptionCommand() {Options = array});
                 
                 var variable = _sharedVariableHandleable.Get<string>(Identifier.OptionResult);
+                
+                // put result in buffer
                 buffer.Span[0] = variable;
+                // return  value count
                 return 1;
             }));
             

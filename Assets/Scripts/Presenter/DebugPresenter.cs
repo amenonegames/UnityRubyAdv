@@ -9,7 +9,7 @@ namespace DefaultNamespace
     {
 
         [Route]
-        private async UniTask Move(DebugCommand command)
+        private void Move(DebugCommand command)
         {
             Debug.Log(command.Message);
         }
