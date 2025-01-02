@@ -16,7 +16,7 @@ namespace DefaultNamespace.Logic
         
         public async UniTask RunAsync()
         {
-            var rubySource = Resources.Load<TextAsset>("testRuby");
+            var rubySource = Resources.Load<TextAsset>("Ruby/main");
             using MRubyScript script = _contextHolder.Context.CompileScript(rubySource.bytes);    
             await script.RunAsync();
         }
