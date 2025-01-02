@@ -419,7 +419,7 @@ MonoBehaviour:
   _optionView: {fileID: -4768332450330486610, guid: 4ff3fb93bf560094d8dd13d00b6de57c, type: 3}
   _messageVisualizer: {fileID: 2100749337}
   _verticalPlaceOptionRoot: {fileID: 1800879476}
-  _useRuby: 0
+  _useRuby: 1
 --- !u!1 &1677294404
 GameObject:
   m_ObjectHideFlags: 0
