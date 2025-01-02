@@ -11,6 +11,7 @@ def o(opMessage)
     cmd :option, options: opMessage
 end
 
+##### node型の記法を可能にするためのDialogueManager定義 #####
 class DialogueManager
 def initialize
   @nodes = {}
