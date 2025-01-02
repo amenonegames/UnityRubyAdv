@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using DefaultNamespace.Identfier;
 using DefaultNamespace.Logic.Interface;
 using Lua;
@@ -23,7 +24,8 @@ namespace DefaultNamespace.Logic.Lua
         
         public void AddFunctions()
         {
-            _luaStateHolder.LuaState.Environment["print"]=(new LuaFunction((context , buffer, token) =>
+            var state = _luaStateHolder.LuaState;
+            state.Environment["print"]=(new LuaFunction((context , buffer, token) =>
             {
                 var args = context.GetArgument<string>(0);
                 
@@ -31,14 +33,14 @@ namespace DefaultNamespace.Logic.Lua
                 return new ValueTask<int>(0);
             }));
 
-            _luaStateHolder.LuaState.Environment["talk"]=  (new LuaFunction( async (context , buffer, token) =>
+            state.Environment["talk"]=  (new LuaFunction( async (context , buffer, token) =>
             {
                 var args = context.GetArgument<string>(0);
                 await _commandPublisher.PublishAsync(new TalkCommand() {Message = args});
                 return 0;
             }));
             
-            _luaStateHolder.LuaState.Environment["option"]=  (new LuaFunction( async (context , buffer, token) =>
+            state.Environment["option"]=  (new LuaFunction( async (context , buffer, token) =>
             {
                 var args = context.GetArgument<LuaTable>(0);
 
