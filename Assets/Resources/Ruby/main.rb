@@ -25,7 +25,7 @@ def jump(name)
   if @nodes[name]
     @nodes[name].call
   else
-    puts "Node #{name} not found!"
+    print "Node #{name} not found!"
   end
 end
 
