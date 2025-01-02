@@ -14,14 +14,13 @@ end
 class DialogueManager
 def initialize
   @nodes = {}
-  @state = state
 end
 
 def add_node(name, &block)
   @nodes[name] = block
 end
 
-def jump_to(name)
+def jump(name)
   if @nodes[name]
     @nodes[name].call
   else
@@ -34,44 +33,44 @@ end
 ##### テキスト本体 #####
 
 # ダイアログの定義
-manager = DialogueManager.new
+dm = DialogueManager.new
 
 $first_time = true
 
-manager.add_node(:start) do
+dm.add_node(:start) do
     if $first_time
         print "ruby script start!"
         $first_time = false
     end
     t "Start: Please press continue button"
-    manager.jump_to(:option)
+    dm.jump(:option)
 end
 
-manager.add_node(:option) do
+dm.add_node(:option) do
     o ["Yes", "No"]
     result = state[:result].is?("Yes") #正常動作
     if result #=> true
-        manager.jump_to(:yes_response)
+        dm.jump(:yes_response)
     else 
-        manager.jump_to(:no_response)
+        dm.jump(:no_response)
     end
 end
 
-manager.add_node(:yes_response) do
+dm.add_node(:yes_response) do
     t "Yes? Really?"
-    manager.jump_to(:end)
+    dm.jump(:end)
 end
 
-manager.add_node(:no_response) do
+dm.add_node(:no_response) do
     t "No? Really?"
-    manager.jump_to(:end)
+    dm.jump(:end)
 end
 
-manager.add_node(:end) do
+dm.add_node(:end) do
     t "End of the dialogue."
     t "Return to the start."
-    manager.jump_to(:start)
+    dm.jump(:start)
 end
 
 # ダイアログの開始
-manager.jump_to(:start)
+dm.jump(:start)
