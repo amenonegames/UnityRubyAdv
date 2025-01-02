@@ -49,7 +49,7 @@ end
 
 dm.add_node(:option) do
     o ["Yes", "No"]
-    result = state[:result].is?("Yes") #正常動作
+    result = state[:result].is?("Yes")
     if result #=> true
         dm.jump(:yes_response)
     else 
