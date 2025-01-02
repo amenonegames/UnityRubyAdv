@@ -20,12 +20,7 @@ namespace DefaultNamespace.Logic.Lua
             _commandPublisher = commandPublisher;
             _sharedVariableHandleable = sharedVariableHandleable;
         }
-
-        public void AddFunction(string functionName, LuaFunction function)
-        {
-            _luaStateHolder.LuaState.Environment[functionName] = function;
-        }
-
+        
         public void AddFunctions()
         {
             _luaStateHolder.LuaState.Environment["print"]=(new LuaFunction((context , buffer, token) =>
