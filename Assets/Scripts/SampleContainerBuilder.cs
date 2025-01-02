@@ -49,7 +49,7 @@ namespace DefaultNamespace
                 builder.RegisterInstance(context);
                 
                 builder.Register<MyCommandPreset>(Lifetime.Singleton)
-                    .As<MRubyCommandPreset>();
+                    .AsSelf();
                 
                 builder.Register<RubyContextHolder>(Lifetime.Singleton)
                     .AsSelf();
